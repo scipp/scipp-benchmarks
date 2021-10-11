@@ -1,0 +1,19 @@
+{
+    "benchmarks.ScippVariableSuite.time_creating_scalar_variable": {
+        "code": "class ScippVariableSuite:\n    def time_creating_scalar_variable(self):\n        self.var = sc.scalar(1)\n\n    def setup(self):\n        self.var = None",
+        "min_run_count": 2,
+        "name": "benchmarks.ScippVariableSuite.time_creating_scalar_variable",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "902a0be53178baa463c13dfa789e74f954c7faedaff6b82a730e3b2c72be4594",
+        "warmup_time": -1
+    },
+    "version": 2
+}
