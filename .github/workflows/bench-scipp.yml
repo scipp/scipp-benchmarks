@@ -6,6 +6,7 @@ name: Benchmark scipp
 on:
   schedule:
     - cron: '10 * * * *'
+  workflow_dispatch
   
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -28,7 +29,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run asv benchmarks
         shell: bash -l {0}
-        run: asv run -v --skip-existing-commits
+        run: asv run -v --skip-existing-commits -m cloud-container
         
       - name: Publish asv results locally
         shell: bash -l {0}

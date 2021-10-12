@@ -1,0 +1,9 @@
+{
+    "arch": "x86_64",
+    "cpu": "2 CPU Cores",
+    "machine": "cloud-container",
+    "num_cpu": "2",
+    "os": "Ubuntu Latest",
+    "ram": "7516000",
+    "version": 1
+}
