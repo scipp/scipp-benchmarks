@@ -4,6 +4,6 @@
     "machine": "cloud-container",
     "num_cpu": "2",
     "os": "Ubuntu Latest",
-    "ram": "7516000",
+    "ram": "7GB",
     "version": 1
 }
