@@ -1,8 +1,9 @@
 name: Benchmark scipp
 
-on:
+on: 
   schedule:
     - cron: '0 * * * *'
+  push:
   
 
 jobs:
