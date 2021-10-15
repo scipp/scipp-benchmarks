@@ -1,1 +1,1 @@
-[{"name": "benchmarks.ScippVariableSuite.time_creating_scalar_variable", "idx": null, "pretty_name": "benchmarks.ScippVariableSuite.time_creating_scalar_variable", "last_rev": 14162, "last_value": 3.132964148116352e-06, "last_err": 0.0, "prev_value": null, "change_rev": null}]
+[{"name": "benchmarks.ScippVariableSuite.time_creating_scalar_variable", "idx": null, "pretty_name": "benchmarks.ScippVariableSuite.time_creating_scalar_variable", "last_rev": 14162, "last_value": 3.164135791585315e-06, "last_err": 0.0, "prev_value": null, "change_rev": null}]
