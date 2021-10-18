@@ -29,20 +29,6 @@ jobs:
         shell: bash -l {0}
         run: asv run -v -m cloud-container -e
         
-      - name: Publish asv results locally
+      - name: Publish asv results to gh_pages branch
         shell: bash -l {0}
-        run: asv publish
-      
-      - name: Commit new results if any to the repo
-        shell: bash -l {0}
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add *
-          git commit -m "[Bot] Update results"
-      
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+        run: asv gh_pages
