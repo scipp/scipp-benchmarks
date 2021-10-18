@@ -1,8 +1,8 @@
 {
-    "benchmarks.ScippVariableSuite.time_creating_scalar_variable": {
-        "code": "class ScippVariableSuite:\n    def time_creating_scalar_variable(self):\n        self.var = sc.scalar(1)\n\n    def setup(self):\n        self.var = None",
+    "benchmarks.Scipp.time_deep_copy": {
+        "code": "class Scipp:\n    def time_deep_copy(self):\n        self.var1.copy()\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
         "min_run_count": 2,
-        "name": "benchmarks.ScippVariableSuite.time_creating_scalar_variable",
+        "name": "benchmarks.Scipp.time_deep_copy",
         "number": 0,
         "param_names": [],
         "params": [],
@@ -12,7 +12,55 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "902a0be53178baa463c13dfa789e74f954c7faedaff6b82a730e3b2c72be4594",
+        "version": "344b6925e4c136a27373d9e5214d80ccade9728465d59aac110608d8e5b94ad3",
+        "warmup_time": -1
+    },
+    "benchmarks.Scipp.time_shallow_copy": {
+        "code": "class Scipp:\n    def time_shallow_copy(self):\n        self.var1 = self.var2\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "benchmarks.Scipp.time_shallow_copy",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3ac328a622fd5dfef6f9b1038b838b5eb7616905d3e41db78424c53ce42987dd",
+        "warmup_time": -1
+    },
+    "benchmarks.Scipp.time_variable_inplace_operation": {
+        "code": "class Scipp:\n    def time_variable_inplace_operation(self):\n        self.var1 += self.var2\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "benchmarks.Scipp.time_variable_inplace_operation",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e0b1d41415733916e94c7ef24370fd5cb47013a4a4735a6ea493181600eaa33a",
+        "warmup_time": -1
+    },
+    "benchmarks.Scipp.time_variable_non_inplace_operation": {
+        "code": "class Scipp:\n    def time_variable_non_inplace_operation(self):\n        self.var1 + self.var2\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "benchmarks.Scipp.time_variable_non_inplace_operation",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "00b2ba7f04b6b58818c7b8ce4589d64e53a11268d2503da444f0ac188a8aa5cc",
         "warmup_time": -1
     },
     "version": 2

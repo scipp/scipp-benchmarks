@@ -23,7 +23,7 @@ jobs:
 
       - name: Run asv benchmarks
         shell: bash -l {0}
-        run: asv run -v -m cloud-container
+        run: asv run -v -m cloud-container -e
         
       - name: Publish asv results locally
         shell: bash -l {0}
