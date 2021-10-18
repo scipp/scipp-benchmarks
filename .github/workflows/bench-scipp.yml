@@ -15,7 +15,7 @@ jobs:
 
       - name: Clone Scipp
         shell: bash -l {0}
-        run: git checkout https://github.com/scipp/scipp repo
+        run: git clone https://github.com/scipp/scipp repo
 
       - name: Install asv
         shell: bash -l {0}
