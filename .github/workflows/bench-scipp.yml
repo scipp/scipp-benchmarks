@@ -31,4 +31,7 @@ jobs:
         
       - name: Publish asv results to gh_pages branch
         shell: bash -l {0}
-        run: asv gh-pages
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          asv gh-pages
