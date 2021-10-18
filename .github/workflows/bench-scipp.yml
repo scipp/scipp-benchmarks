@@ -62,7 +62,7 @@ jobs:
           git stash
           git fetch
           git checkout gh_pages
-          git stash pop
+          git checkout stash -- .
 
       - name: Commit changes and new results to github pages
         shell: bash -l {0}
