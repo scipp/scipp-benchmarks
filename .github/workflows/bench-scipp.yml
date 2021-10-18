@@ -54,8 +54,11 @@ jobs:
         shell: bash -l {0}
         run: |
           rm -v !("html") -rf
-          cp -a ./html .
+          cp -a ./html/* .
           rm -rf html
+          rm -rf .github
+          rm -rf .idea
+          git add *
           git stash
           git fetch
           git checkout gh_pages
