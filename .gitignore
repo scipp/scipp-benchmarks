@@ -133,3 +133,6 @@ dmypy.json
 
 # ASV generated bits
 Scipp/
+
+# Used in the CI
+repo/

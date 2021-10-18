@@ -9,27 +9,20 @@
     // The project's homepage
     "project_url": "https://scipp.github.io/",
 
-    // The URL or local path of the source code repository for the
-    // project being benchmarked
-    "repo": "https://github.com/scipp/scipp",
+    "repo": "repo", // It is expected that the repo is already present in this folder in a folder called repo
 
     // The Python project's subdirectory in your repo.  If missing or
     // the empty string, the project is assumed to be located at the root
     // of the repository.
 //     "repo_subdir": "python",
 
-
-      // Just overwrite the conda environment with our current environment file
      "install_command": [
        "in-dir={env_dir} python -c 'import shutil\nshutil.copytree(\"SCIPP_INSTALL/include\", \"include\", dirs_exist_ok=True)\nshutil.copytree(\"SCIPP_INSTALL/lib\", \"lib\", dirs_exist_ok=True)\nshutil.copytree(\"SCIPP_INSTALL/scipp\", \"lib/python3.9/scipp\", dirs_exist_ok=True)\nshutil.copytree(\"SCIPP_INSTALL/scipp\", \"lib/python3.8/scipp\", dirs_exist_ok=True)\nshutil.copytree(\"SCIPP_INSTALL/scipp\", \"lib/python3.7/scipp\", dirs_exist_ok=True)'"
-//       "in-dir={env_dir} python -c 'import subprocess\nsubprocess.run(\"export PYTHONPATH=$PYTHONPATH:./SCIPP_INSTALL\", shell=True, check=True)'"
      ],
      "uninstall_command": [
        "return-code=any in-dir={env_dir} python -c 'import shutil\nshutil.rmtree('lib/python3.8/scipp')'"
      ],
      "build_command": [
-//         "python setup.py build",
-//         "PIP_NO_BUILD_ISOLATION=false python -mpip wheel --no-deps --no-index -w {build_cache_dir} {build_dir}"
        "cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DPython_EXECUTABLE='$(command -v python3)' -DCMAKE_INSTALL_PREFIX=../SCIPP_INSTALL -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DDYNAMIC_LIB=ON -B build",
        "ninja -C build",
        "ninja -C build install"
@@ -37,8 +30,7 @@
 
     // List of branches to benchmark. If not provided, defaults to "master"
     // (for git) or "default" (for mercurial).
-     "branches": ["main"], // for git
-    // "branches": ["default"],    // for mercurial
+     "branches": ["main"],
 
     // The DVCS being used.  If not set, it will be automatically
     // determined from "repo" by looking at the protocol in the URL
@@ -67,8 +59,7 @@
     // The list of conda channel names to be searched for benchmark
     // dependency packages in the specified order
      "conda_channels": [
-       "conda-forge"//,
-//       "scipp/label/dev"
+       "conda-forge"
      ],
 
     // The matrix of dependencies to test.  Each key is the name of a
@@ -82,7 +73,6 @@
     // followed by the pip installed packages).
     //
      "matrix": {
-//         "scipp": [""],
          "ninja": [""],
          "tbb-devel": [""],
          "conan": [""],
@@ -106,8 +96,7 @@
          "xarray": [""],
          "pandas": [""],
          "scipy": [""]
-//         "widgetsnbextension": [""]
-     }
+     },
 
     // Combinations of libraries/python versions can be excluded/included
     // from the set to test. Each entry is a dictionary containing additional
@@ -144,7 +133,7 @@
 
     // The directory (relative to the current directory) that benchmarks are
     // stored in.  If not provided, defaults to "benchmarks"
-    // "benchmark_dir": "benchmarks",
+     "benchmark_dir": "repo/benchmarks"
 
     // The directory (relative to the current directory) to cache the Python
     // environments in.  If not provided, defaults to "env"
