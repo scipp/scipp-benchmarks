@@ -31,4 +31,4 @@ jobs:
         
       - name: Publish asv results to gh_pages branch
         shell: bash -l {0}
-        run: asv gh_pages
+        run: asv gh-pages
