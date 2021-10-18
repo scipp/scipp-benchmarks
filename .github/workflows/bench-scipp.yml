@@ -28,18 +28,44 @@ jobs:
       - name: Run asv benchmarks
         shell: bash -l {0}
         run: asv run -v -m cloud-container -e
-        
-      - name: Publish asv results locally
-        shell: bash -l {0}
-        run: asv publish
 
-      - name: Commit new results if any to the repo
+      - name: Commit changes and new results to github pages
         shell: bash -l {0}
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add *
           git commit -m "[Bot] Update results"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+
+      - name: Publish asv results locally
+        shell: bash -l {0}
+        run: asv publish
+
+# Remove all but the website html folder, copy contents of html one higher, remove html,
+# stash to revert main back to before cleaning, then git checkout gh_pages, before
+# popping the stash and applying all changes for this branch.
+      - name: Prep website for gh_pages branch
+        shell: bash -l {0}
+        run: |
+          rm -v !("html") -rf
+          cp -a ./html .
+          rm -rf html
+          git stash
+          git fetch
+          git checkout gh_pages
+          git stash pop
+
+      - name: Commit changes and new results to github pages
+        shell: bash -l {0}
+        run: |
+          git add *
+          git commit -m "[Bot] Publish to Github Pages"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
