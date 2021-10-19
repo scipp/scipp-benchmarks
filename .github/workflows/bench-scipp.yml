@@ -59,11 +59,11 @@ jobs:
       - name: Prep website for gh_pages branch
         shell: bash -l {0}
         run: |
-          rm -v !("html") -rf
-          cp -a ./html/* .
-          rm -rf html
-          rm -rf .github
-          rm -rf .idea
+          rm -v !("html") -rf -v
+          cp -a ./html/* . -v
+          rm -rf html -v
+          rm -rf .github -v
+          rm -rf .idea -v
           git add *
           git stash
           git fetch
