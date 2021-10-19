@@ -21,6 +21,12 @@ jobs:
         shell: bash -l {0}
         run: pip install asv
 
+      - name: Set up GCC
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: latest
+          platform: x64
+
       - name: Configure asv
         shell: bash -l {0}
         run: asv machine --machine cloud-container --os "Ubuntu latest" --arch 'x86_64' --cpu "2 Core CPU" --num_cpu 2 --ram '7GB'
