@@ -21,11 +21,13 @@ jobs:
         shell: bash -l {0}
         run: pip install asv
 
-      - name: Set up GCC
-        uses: egor-tensin/setup-gcc@v1
-        with:
-          version: latest
-          platform: x64
+      - name: Set up GCC 11 Compiler
+        shell: bash -l {0}
+        run: |
+          sudo apt install software-properties-common -y
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          sudo apt update -y
+          sudo apt install gcc-11 -y
 
       - name: Configure asv
         shell: bash -l {0}
