@@ -17,19 +17,14 @@ jobs:
         shell: bash -l {0}
         run: git clone https://github.com/scipp/scipp repo
 
+      - name: Setup conda env
+        shell: bash -l {0}
+        run: |
+          conda env create -f repo/scipp-developer.yml
+
       - name: Install asv
         shell: bash -l {0}
         run: pip install asv
-
-      - name: Set up GCC 11 Compiler
-        shell: bash -l {0}
-        run: |
-          sudo apt install software-properties-common -y
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-          sudo apt update -y
-          sudo apt install gcc-11 -y
-          sudo ln -sf g++-11 /usr/bin/g++
-          sudo ln -sf gcc-11 /usr/bin/gcc
 
       - name: Configure asv
         shell: bash -l {0}
