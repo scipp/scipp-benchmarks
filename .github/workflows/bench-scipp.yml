@@ -17,12 +17,15 @@ jobs:
         shell: bash -l {0}
         run: git clone https://github.com/scipp/scipp repo
 
-      - name: Setup conda env
+      - name: Create scipp conda env
         shell: bash -l {0}
         run: |
           conda env create -f repo/scipp-developer.yml
-          . $(dirname $(which conda))/../etc/profile.d/conda.sh
-          conda activate scipp-developer
+
+      - name: Activate scipp conda env
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: scipp-developer
 
       - name: Install asv
         shell: bash -l {0}
