@@ -23,7 +23,7 @@ jobs:
           conda env create -f repo/scipp-developer.yml
 
       - name: Activate scipp conda env
-      - uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: scipp-developer
 
