@@ -62,6 +62,8 @@ jobs:
       - name: Prep website for gh_pages branch
         shell: bash -l {0}
         run: |
+#          Enable extglob so we can remove all but html
+          shopt -s extglob
           rm -v !("html") -rf -v
           cp -a ./html/* . -v
           rm -rf html -v
