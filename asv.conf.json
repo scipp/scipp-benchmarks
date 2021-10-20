@@ -23,7 +23,7 @@
        "return-code=any in-dir={env_dir} python -c 'import shutil\nshutil.rmtree(\"lib/python3.7/scipp\")\nshutil.rmtree(\"lib/python3.8/scipp\")\nshutil.rmtree(\"lib/python3.9/scipp\")'"
      ],
      "build_command": [
-       "cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DPython_EXECUTABLE='$(command -v python3)' -DCMAKE_INSTALL_PREFIX=../SCIPP_INSTALL -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DDYNAMIC_LIB=ON -B build",
+       "cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DPython_EXECUTABLE='$(command -v python3)' -DCMAKE_INSTALL_PREFIX=../SCIPP_INSTALL -B build",
        "ninja -C build",
        "ninja -C build install"
      ],
