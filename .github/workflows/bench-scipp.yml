@@ -13,6 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Check if commit already benched
+        shell: bash -l {0}
+        run: |
+          export SCIPP_COMMIT_HASH="echo $(command git ls-remote https://github.com/scipp/scipp HEAD | head -n1 | sed -e 's/\s.*$//')"
+          grep -Fxq $SCIPP_COMMIT_HASH scipp_commit_hash
+
       - name: Clone Scipp
         shell: bash -l {0}
         run: git clone https://github.com/scipp/scipp repo
@@ -45,6 +51,11 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add results/\*
           git commit -m "[Bot] Update results"
+
+      - name: Create the Scipp repo commit hash file
+        shell: bash -l {0}
+        run: |
+          echo $SCIPP_COMMIT_HASH >> scipp_commit_hash
 
       - name: Push changes
         uses: ad-m/github-push-action@master
