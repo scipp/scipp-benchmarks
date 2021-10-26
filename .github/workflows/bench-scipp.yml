@@ -9,6 +9,12 @@ on:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
+    env:
+      CCACHE_BASEDIR: "${{ github.workspace }}"
+      CCACHE_DIR: "${{ github.workspace }}/.ccache"
+      CCACHE_COMPRESS: true
+      CCACHE_COMPRESSLEVEL: 6
+      CCACHE_MAXSIZE: 400M
 
     steps:
       - uses: actions/checkout@v2
@@ -31,6 +37,27 @@ jobs:
           environment-file: repo/scipp-developer.yml
           activate-environment: scipp-developer
           auto-activate-base: false
+      
+      - name: Install and Setup ccache
+        shell: bash -l {0}
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y ccache
+          # Make gcc/gxx symlinks first in path
+          sudo /usr/sbin/update-ccache-symlinks
+          echo "/usr/lib/ccache" >> $GITHUB_PATH
+          # Prep Ccache
+          echo "::set-output name=key::benchmark-$RUNNER_OS"
+          echo "::set-output name=timestamp::$(date +%Y%m%d-%H%M%S)"
+          ccache -p
+          ccache -z
+      
+      - name: "Restore ccache"
+        uses: actions/cache@v1.1.0
+        with:
+          path: .ccache
+          key: ccache-${{ secrets.CACHE_VERSION }}-${{ steps.prepare-ccache.outputs.key }}-${{ steps.prepare-ccache.outputs.timestamp }}
+          restore-keys: |
+            ccache-${{ secrets.CACHE_VERSION }}-${{ steps.prepare-ccache.outputs.key }}-
 
       - name: Install asv
         shell: bash -l {0}
@@ -43,6 +70,11 @@ jobs:
       - name: Run asv benchmarks
         shell: bash -l {0}
         run: asv run -v -m cloud-container -e
+        
+      - name: "Check ccache performance"
+        shell: bash -l {0}
+        run: ccache -s
+        if: always()
 
       - name: Commit changes and new results to github pages
         shell: bash -l {0}
