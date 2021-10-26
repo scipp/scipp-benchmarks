@@ -101,7 +101,7 @@ jobs:
       - name: Create the Scipp repo commit hash file
         shell: bash -l {0}
         run: |
-          $SCIPP_COMMIT_HASH >> scipp_commit_hash
+          $SCIPP_COMMIT_HASH > scipp_commit_hash
 
       - name: Push changes
         uses: ad-m/github-push-action@master
