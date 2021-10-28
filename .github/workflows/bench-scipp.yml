@@ -62,11 +62,6 @@ jobs:
           # Use mamba for env creation
           export CONDA_EXE=$(which mamba)
           asv run -v -m cloud-container -e
-        
-      - name: "Check ccache performance"
-        shell: bash -l {0}
-        run: ccache -s
-        if: always()
 
       - name: Create the Scipp repo commit hash file
         shell: bash -l {0}
