@@ -22,8 +22,8 @@ jobs:
       - name: Check if commit already benched
         shell: bash -l {0}
         run: |
-          export SCIPP_COMMIT_HASH="echo $(command git ls-remote https://github.com/scipp/scipp HEAD | head -n1 | sed -e 's/\s.*$//')"
-          if grep -FxL "$SCIPP_COMMIT_HASH" scipp_commit_hash; then exit 1; fi
+          export SCIPP_COMMIT_HASH="$(command git ls-remote https://github.com/scipp/scipp HEAD | head -n1 | sed -e 's/\s.*$//')"
+          if grep -Fxl "$SCIPP_COMMIT_HASH" scipp_commit_hash; then exit 1; fi
 
       - name: Clone Scipp
         shell: bash -l {0}
@@ -53,7 +53,7 @@ jobs:
         run: |
           mamba install ccache
       
-      - name: "Restore ccache"
+      - name: Restore ccache cache
         uses: actions/cache@v1.1.0
         env:
           # Increase this value to reset cache if etc/example-environment.yml has not changed
