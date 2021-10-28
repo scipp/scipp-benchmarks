@@ -23,7 +23,7 @@ jobs:
         shell: bash -l {0}
         run: |
           export SCIPP_COMMIT_HASH="echo $(command git ls-remote https://github.com/scipp/scipp HEAD | head -n1 | sed -e 's/\s.*$//')"
-          grep -Fxv "$SCIPP_COMMIT_HASH" scipp_commit_hash
+          if grep -FxL "$SCIPP_COMMIT_HASH" scipp_commit_hash; then exit 1; fi
 
       - name: Clone Scipp
         shell: bash -l {0}
