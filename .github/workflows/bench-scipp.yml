@@ -60,7 +60,7 @@ jobs:
       - name: Create the Scipp repo commit hash file
         shell: bash -l {0}
         run: |
-          $SCIPP_COMMIT_HASH > scipp_commit_hash
+          echo "$SCIPP_COMMIT_HASH" > scipp_commit_hash
 
       - name: Commit changes and new results to github pages
         shell: bash -l {0}
