@@ -9,12 +9,6 @@ on:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
-    env:
-      CCACHE_BASEDIR: "${{ github.workspace }}"
-      CCACHE_DIR: "${{ github.workspace }}/.ccache"
-      CCACHE_COMPRESS: true
-      CCACHE_COMPRESSLEVEL: 6
-      CCACHE_MAXSIZE: 400M
 
     steps:
       - uses: actions/checkout@v2
