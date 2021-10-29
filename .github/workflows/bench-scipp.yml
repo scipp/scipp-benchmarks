@@ -18,6 +18,7 @@ jobs:
         run: |
           export SCIPP_COMMIT_HASH="$(command git ls-remote https://github.com/scipp/scipp HEAD | head -n1 | sed -e 's/\s.*$//')"
           if grep -Fxl "$SCIPP_COMMIT_HASH" scipp_commit_hash; then exit 1; fi
+          echo "$SCIPP_COMMIT_HASH" > scipp_commit_hash
 
       - name: Clone Scipp
         shell: bash -l {0}
@@ -56,11 +57,6 @@ jobs:
           # Use mamba for env creation
           export CONDA_EXE=$(which mamba)
           asv run -v -m cloud-container -e
-
-      - name: Create the Scipp repo commit hash file
-        shell: bash -l {0}
-        run: |
-          echo "$SCIPP_COMMIT_HASH" > scipp_commit_hash
 
       - name: Commit changes and new results to github pages
         shell: bash -l {0}
