@@ -194,6 +194,35 @@
         "version": "3998bb34213db7e17d90d3fe088ea8ac4f40755facef0382b95bd2cac9de4822",
         "warmup_time": -1
     },
+    "binned.Binned2dConcat.time_bins_concat": {
+        "code": "class Binned2dConcat:\n    def time_bins_concat(self, nbin):\n        self.da.bins.concat('x')\n\n    def setup(self, nbin):\n        nx = 100000\n        binned = sc.data.binned_x(nevent=2 * nx, nbin=nx)\n        y = sc.linspace(dim='y', start=0, stop=1, num=nbin + 1, unit='m')\n        self.da = sc.bin(binned, edges=[y])",
+        "min_run_count": 2,
+        "name": "binned.Binned2dConcat.time_bins_concat",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d3b70cdb073aefee5d0a80881563a1da1e30fc7781d83b55f12f3f3f062fb8bb",
+        "warmup_time": -1
+    },
     "binned.Lookup.time_create_bool": {
         "code": "class Lookup:\n    def time_create_bool(self):\n        self.hist_bool.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_bool, 'x')\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
         "min_run_count": 2,
