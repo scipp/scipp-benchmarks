@@ -1,4 +1,85 @@
 {
+    "bin.Bin2dRebinLongDim.time_outer": {
+        "code": "class Bin2dRebinLongDim:\n    def time_outer(self, nbin):\n        x = sc.linspace(dim='x', start=0, stop=1, num=nbin - 1, unit='m')\n        sc.bin(self.da, edges=[x])\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = sc.bin(binned, edges=[y])\n        self.da_transposed = self.da.transpose().copy()",
+        "min_run_count": 2,
+        "name": "bin.Bin2dRebinLongDim.time_outer",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e4002b719ddc83354bcb78f5889b454f6d0541e4fd63e9b1433d5251c89904be",
+        "warmup_time": -1
+    },
+    "bin.Bin2dRebinLongDim.time_outer_transposed": {
+        "code": "class Bin2dRebinLongDim:\n    def time_outer_transposed(self, nbin):\n        x = sc.linspace(dim='x', start=0, stop=1, num=nbin - 1, unit='m')\n        sc.bin(self.da.transpose(), edges=[x])\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = sc.bin(binned, edges=[y])\n        self.da_transposed = self.da.transpose().copy()",
+        "min_run_count": 2,
+        "name": "bin.Bin2dRebinLongDim.time_outer_transposed",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "092dadc12bc5b4d720bddf890cdceb93a60112d117dc58daa51f762325ee5e87",
+        "warmup_time": -1
+    },
+    "bin.Bin2dRebinLongDim.time_outer_transposed_copied": {
+        "code": "class Bin2dRebinLongDim:\n    def time_outer_transposed_copied(self, nbin):\n        x = sc.linspace(dim='x', start=0, stop=1, num=nbin - 1, unit='m')\n        sc.bin(self.da_transposed, edges=[x])\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = sc.bin(binned, edges=[y])\n        self.da_transposed = self.da.transpose().copy()",
+        "min_run_count": 2,
+        "name": "bin.Bin2dRebinLongDim.time_outer_transposed_copied",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "f3446ded5533ec2394f386fb60b6178a761a1c2fc635d4db37d6b7484faec5f7",
+        "warmup_time": -1
+    },
     "binned.Binned1d.time_bins_concat": {
         "code": "class Binned1d:\n    def time_bins_concat(self, nevent, nbin):\n        self.da.bins.concat('x')\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
         "min_run_count": 2,
@@ -221,6 +302,33 @@
         "type": "time",
         "unit": "seconds",
         "version": "d3b70cdb073aefee5d0a80881563a1da1e30fc7781d83b55f12f3f3f062fb8bb",
+        "warmup_time": -1
+    },
+    "binned.Binned2dConcatInner.time_bins_concat_long_outer": {
+        "code": "class Binned2dConcatInner:\n    def time_bins_concat_long_outer(self, nbin):\n        self.da.bins.concat('y')\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = sc.bin(binned, edges=[y])",
+        "min_run_count": 2,
+        "name": "binned.Binned2dConcatInner.time_bins_concat_long_outer",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1381daa962c3140f2636e538fa32abc79a42f921d8b5b8fbc8fb8e8e4139df90",
         "warmup_time": -1
     },
     "binned.Lookup.time_create_bool": {
