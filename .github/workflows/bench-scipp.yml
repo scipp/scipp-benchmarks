@@ -55,7 +55,7 @@ jobs:
 
       - name: Run asv update
         shell: bash -l {0}
-        run: pip install asv
+        run: asv update
 
       - name: Run asv benchmarks
         shell: bash -l {0}
