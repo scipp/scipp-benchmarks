@@ -73,29 +73,28 @@
     // followed by the pip installed packages).
     //
      "matrix": {
-         "ninja": [""],
-         "tbb-devel": [""],
-         "conan": [""],
-         "cmake": [""],
-         "pip": [""],
 //         "gxx_linux-64": [""], This is not actually used in compile
-         "appdirs": [""],
+         "cmake": [""],
+         "conan": [""],
+         "confuse": [""],
+         "h5py": [""],
          "ipykernel": [""],
          "ipympl": [""],
          "ipywidgets": [""],
          "matplotlib-base": [""],
+         "ninja": [""],
          "numpy": [""],
+         "pandas": [""],
+         "pip": [""],
+         "pytest": [""],
          "python": [""],
-         "python-configuration": [""],
+         "python-graphviz": [""],
          "pythreejs": [""],
          "pyyaml": [""],
+         "scipy": [""],
          "tbb": [""],
-         "h5py": [""],
-         "pytest": [""],
-         "python-graphviz": [""],
-         "xarray": [""],
-         "pandas": [""],
-         "scipy": [""]
+         "tbb-devel": [""],
+         "xarray": [""]
      },
 
     // Combinations of libraries/python versions can be excluded/included
