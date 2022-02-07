@@ -53,6 +53,10 @@ jobs:
         shell: bash -l {0}
         run: asv machine --machine cloud-container --os "Ubuntu latest" --arch 'x86_64' --cpu "2 Core CPU" --num_cpu 2 --ram '7GB'
 
+      - name: Run asv update
+        shell: bash -l {0}
+        run: pip install asv
+
       - name: Run asv benchmarks
         shell: bash -l {0}
         run: |
