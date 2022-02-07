@@ -42,7 +42,7 @@ jobs:
           miniforge-version: latest
           miniforge-variant: Mambaforge
           environment-file: buildenv.yml
-          activate-environment: scipp-developer
+          activate-environment: buildenv
           auto-activate-base: false
 
       - name: Install asv
