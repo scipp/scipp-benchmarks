@@ -1,50 +1,43 @@
 {
-    "bin.Bin1d.time_coarse": {
-        "code": "class Bin1d:\n    def time_coarse(self):\n        sc.bin(self.table, edges=[self.x_coarse])\n\n    def setup(self):\n        self.table = sc.data.table_xyz(100_000_000)\n        self.x_coarse = sc.linspace(dim='x', start=0, stop=1, num=2**8, unit='m')\n        self.x_fine = sc.linspace(dim='x', start=0, stop=1, num=2**16, unit='m')",
+    "bin.Bin1d.time_bin_table": {
+        "code": "class Bin1d:\n    def time_bin_table(self, nbin):\n        sc.bin(self.table, edges=[self.x])\n\n    def setup(self, nbin):\n        self.table = sc.data.table_xyz(100_000_000)\n        self.x = sc.linspace(dim='x', start=0, stop=1, num=nbin + 1, unit='m')",
         "min_run_count": 2,
-        "name": "bin.Bin1d.time_coarse",
+        "name": "bin.Bin1d.time_bin_table",
         "number": 0,
-        "param_names": [],
-        "params": [],
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768",
+                "65536",
+                "131072",
+                "262144",
+                "524288"
+            ]
+        ],
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "timeout": 60.0,
+        "timeout": 300.0,
         "type": "time",
         "unit": "seconds",
-        "version": "dafc8eb4d20961630bf1b06432f0f049002f1fb77439bc28ea233812f88f4b61",
-        "warmup_time": -1
-    },
-    "bin.Bin1d.time_coarse_then_fine": {
-        "code": "class Bin1d:\n    def time_coarse_then_fine(self):\n        \"\"\"Iteratore coarse -> fine binning which may be faster than direct fine binning\n        \"\"\"\n        coarse = sc.bin(self.table, edges=[self.x_coarse])\n        sc.bin(coarse, edges=[self.x_fine])\n\n    def setup(self):\n        self.table = sc.data.table_xyz(100_000_000)\n        self.x_coarse = sc.linspace(dim='x', start=0, stop=1, num=2**8, unit='m')\n        self.x_fine = sc.linspace(dim='x', start=0, stop=1, num=2**16, unit='m')",
-        "min_run_count": 2,
-        "name": "bin.Bin1d.time_coarse_then_fine",
-        "number": 0,
-        "param_names": [],
-        "params": [],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "timeout": 60.0,
-        "type": "time",
-        "unit": "seconds",
-        "version": "fa81c8b38b2ec4c05035b01647ac9b8c8f3b8dfca85f308361d4071b3a5a4767",
-        "warmup_time": -1
-    },
-    "bin.Bin1d.time_fine": {
-        "code": "class Bin1d:\n    def time_fine(self):\n        sc.bin(self.table, edges=[self.x_fine])\n\n    def setup(self):\n        self.table = sc.data.table_xyz(100_000_000)\n        self.x_coarse = sc.linspace(dim='x', start=0, stop=1, num=2**8, unit='m')\n        self.x_fine = sc.linspace(dim='x', start=0, stop=1, num=2**16, unit='m')",
-        "min_run_count": 2,
-        "name": "bin.Bin1d.time_fine",
-        "number": 0,
-        "param_names": [],
-        "params": [],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "timeout": 60.0,
-        "type": "time",
-        "unit": "seconds",
-        "version": "25cc9c277891356d1ef6932d512363c4856f053fd31da243c38df45fe0133959",
+        "version": "0283b7a43ad3560e99b3cfd1c03c413028af7362452dc68e31ed3fa2469e882a",
         "warmup_time": -1
     },
     "bin.Bin2dRebinLongDim.time_outer": {
