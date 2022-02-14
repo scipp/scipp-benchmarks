@@ -1,6 +1,6 @@
 {
     "bin.Bin1d.time_bin_table": {
-        "code": "class Bin1d:\n    def time_bin_table(self, nbin):\n        sc.bin(self.table, edges=[self.x])\n\n    def setup(self, nbin):\n        self.table = sc.data.table_xyz(100_000_000)\n        self.x = sc.linspace(dim='x', start=0, stop=1, num=nbin + 1, unit='m')",
+        "code": "class Bin1d:\n    def time_bin_table(self, nbin):\n        sc.bin(self.table, edges=[self.x])\n\n    def setup(self, nbin):\n        self.table = sc.data.table_xyz(50_000_000)\n        self.x = sc.linspace(dim='x', start=0, stop=1, num=nbin + 1, unit='m')",
         "min_run_count": 2,
         "name": "bin.Bin1d.time_bin_table",
         "number": 0,
@@ -37,7 +37,7 @@
         "timeout": 300.0,
         "type": "time",
         "unit": "seconds",
-        "version": "0283b7a43ad3560e99b3cfd1c03c413028af7362452dc68e31ed3fa2469e882a",
+        "version": "f88205b96f459009e8a8f41c6931493e956900455653545fe1f4119ac91b2197",
         "warmup_time": -1
     },
     "bin.Bin2dRebinLongDim.time_outer": {
