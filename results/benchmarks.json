@@ -1,0 +1,584 @@
+{
+    "bin.Bin1d.time_bin_table": {
+        "code": "class Bin1d:\n    def time_bin_table(self, nbin):\n        make_binned(self.table, edges=[self.x])\n\n    def setup(self, nbin):\n        self.table = sc.data.table_xyz(50_000_000)\n        self.x = sc.linspace(dim='x', start=0, stop=1, num=nbin + 1, unit='m')",
+        "min_run_count": 2,
+        "name": "bin.Bin1d.time_bin_table",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768",
+                "65536",
+                "131072",
+                "262144",
+                "524288"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "f2e8b7683e6f274b5c269ec1c7a174683ff1e5473dce21dc0d446fbd5611fa96",
+        "warmup_time": -1
+    },
+    "bin.Bin2dRebinLongDim.time_outer": {
+        "code": "class Bin2dRebinLongDim:\n    def time_outer(self, nbin):\n        x = sc.linspace(dim='x', start=0, stop=1, num=nbin - 1, unit='m')\n        make_binned(self.da, edges=[x])\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = make_binned(binned, edges=[y])\n        self.da_transposed = self.da.transpose().copy()",
+        "min_run_count": 2,
+        "name": "bin.Bin2dRebinLongDim.time_outer",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1db06b58771967cf21e92bf8379883351566a21bf2c9d58e770cdd72f76b0e8c",
+        "warmup_time": -1
+    },
+    "bin.Bin2dRebinLongDim.time_outer_transposed": {
+        "code": "class Bin2dRebinLongDim:\n    def time_outer_transposed(self, nbin):\n        x = sc.linspace(dim='x', start=0, stop=1, num=nbin - 1, unit='m')\n        make_binned(self.da.transpose(), edges=[x])\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = make_binned(binned, edges=[y])\n        self.da_transposed = self.da.transpose().copy()",
+        "min_run_count": 2,
+        "name": "bin.Bin2dRebinLongDim.time_outer_transposed",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e3ff4414681f32b14c9786f7a99dc590aef5ee4c8fa523862e0c0942729a800b",
+        "warmup_time": -1
+    },
+    "bin.Bin2dRebinLongDim.time_outer_transposed_copied": {
+        "code": "class Bin2dRebinLongDim:\n    def time_outer_transposed_copied(self, nbin):\n        x = sc.linspace(dim='x', start=0, stop=1, num=nbin - 1, unit='m')\n        make_binned(self.da_transposed, edges=[x])\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = make_binned(binned, edges=[y])\n        self.da_transposed = self.da.transpose().copy()",
+        "min_run_count": 2,
+        "name": "bin.Bin2dRebinLongDim.time_outer_transposed_copied",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "85fba314140d0326d27e2598f5b3e5f065bb19a10e6af335f7a3cd449dd6f44e",
+        "warmup_time": -1
+    },
+    "binned.Binned1d.time_bins_concat": {
+        "code": "class Binned1d:\n    def time_bins_concat(self, nevent, nbin):\n        self.da.bins.concat('x')\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
+        "min_run_count": 2,
+        "name": "binned.Binned1d.time_bins_concat",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000",
+                "10000000"
+            ],
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "58c2343f62de1ac6146796595db09fec02bea13031193a0dc2db479eda0f2f16",
+        "warmup_time": -1
+    },
+    "binned.Binned1d.time_bins_constituents": {
+        "code": "class Binned1d:\n    def time_bins_constituents(self, nevent, nbin):\n        self.da.bins.constituents\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
+        "min_run_count": 2,
+        "name": "binned.Binned1d.time_bins_constituents",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000",
+                "10000000"
+            ],
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "750e40adcdd72cc2ba4061a49ec5082369d1e0007cf4a6fa4c0ffa95c415c3a5",
+        "warmup_time": -1
+    },
+    "binned.Binned1d.time_bins_mean": {
+        "code": "class Binned1d:\n    def time_bins_mean(self, nevent, nbin):\n        self.da.bins.sum()\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
+        "min_run_count": 2,
+        "name": "binned.Binned1d.time_bins_mean",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000",
+                "10000000"
+            ],
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a4fd83ba82fac7a334c9382b83a22ef41dfbd5af0fcc407dabcbde58e122c5e1",
+        "warmup_time": -1
+    },
+    "binned.Binned1d.time_bins_size": {
+        "code": "class Binned1d:\n    def time_bins_size(self, nevent, nbin):\n        self.da.bins.size()\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
+        "min_run_count": 2,
+        "name": "binned.Binned1d.time_bins_size",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000",
+                "10000000"
+            ],
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "2bb7233e85b8bd6176ab5bb5bf778a5a2cffe8744976d46fc4daa774e164676d",
+        "warmup_time": -1
+    },
+    "binned.Binned1d.time_bins_sum": {
+        "code": "class Binned1d:\n    def time_bins_sum(self, nevent, nbin):\n        self.da.bins.sum()\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
+        "min_run_count": 2,
+        "name": "binned.Binned1d.time_bins_sum",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000",
+                "10000000"
+            ],
+            [
+                "1",
+                "10",
+                "100",
+                "1000",
+                "10000",
+                "100000",
+                "1000000"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3998bb34213db7e17d90d3fe088ea8ac4f40755facef0382b95bd2cac9de4822",
+        "warmup_time": -1
+    },
+    "binned.Binned2dConcat.time_bins_concat": {
+        "code": "class Binned2dConcat:\n    def time_bins_concat(self, nbin):\n        self.da.bins.concat('x')\n\n    def setup(self, nbin):\n        nx = 100000\n        binned = sc.data.binned_x(nevent=2 * nx, nbin=nx)\n        y = sc.linspace(dim='y', start=0, stop=1, num=nbin + 1, unit='m')\n        self.da = make_binned(binned, edges=[y])",
+        "min_run_count": 2,
+        "name": "binned.Binned2dConcat.time_bins_concat",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1fa0539c5e163c0e7bb178b1629a5be1eace65f92b465df93aec2a99b452e66b",
+        "warmup_time": -1
+    },
+    "binned.Binned2dConcatInner.time_bins_concat_long_outer": {
+        "code": "class Binned2dConcatInner:\n    def time_bins_concat_long_outer(self, nbin):\n        self.da.bins.concat('y')\n\n    def setup(self, nbin):\n        binned = sc.data.binned_x(nevent=2 * nbin, nbin=nbin)\n        y = sc.linspace(dim='y', start=0, stop=1, num=2, unit='m')\n        self.da = make_binned(binned, edges=[y])",
+        "min_run_count": 2,
+        "name": "binned.Binned2dConcatInner.time_bins_concat_long_outer",
+        "number": 0,
+        "param_names": [
+            "nbin"
+        ],
+        "params": [
+            [
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d8550afeba7f4310e732bc4dbac947dacaec5a77d5ea60958843557342b198b3",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_create_bool": {
+        "code": "class Lookup:\n    def time_create_bool(self):\n        self.hist_bool.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_bool, 'x')\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_create_bool",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1182a2942aed726d1bc92909be00866c3ea1eac9459a504b53246f0641f92b58",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_create_float64": {
+        "code": "class Lookup:\n    def time_create_float64(self):\n        self.hist_float.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_float, 'x')\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_create_float64",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "bcac8b0b4e48546f141dc655f062ec75192fea135396eb81585618ca85e6823a",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_create_int64": {
+        "code": "class Lookup:\n    def time_create_int64(self):\n        self.hist_int.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_int, 'x')\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_create_int64",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6ac169426d24b6de5f50022fcb693f1490368765c266dfa9a677dcac507329f8",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_map_bool": {
+        "code": "class Lookup:\n    def time_map_bool(self):\n        self.hist_float.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_bool, 'x')[self.data.bins.coords['x']]\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_map_bool",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "52ae6b4a6ec40680b0565241c5065b5b6726e2214893e82e19509ea5f980ebec",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_map_float64": {
+        "code": "class Lookup:\n    def time_map_float64(self):\n        self.hist_float.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_float, 'x')[self.data.bins.coords['x']]\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_map_float64",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3a36700bc9804e956819ca6b3831dd4ae60300b5cea1e8b46fdf117e6cc84362",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_map_int64": {
+        "code": "class Lookup:\n    def time_map_int64(self):\n        self.hist_int.coords['x'].values[-1] *= 1.1\n        sc.lookup(self.hist_int, 'x')[self.data.bins.coords['x']]\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_map_int64",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "dcac5c6baf23074b3de01ea6214f0458b9d32cc7f5646df4fadc8063eb3c47e2",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_map_linspace_bool": {
+        "code": "class Lookup:\n    def time_map_linspace_bool(self):\n        sc.lookup(self.hist_bool, 'x')[self.data.bins.coords['x']]\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_map_linspace_bool",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "240bd46a792d73efe9cf9905b7fd26e1a85ca2b2788f661173bd429898a4978d",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_map_linspace_float64": {
+        "code": "class Lookup:\n    def time_map_linspace_float64(self):\n        sc.lookup(self.hist_float, 'x')[self.data.bins.coords['x']]\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_map_linspace_float64",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "0beede7cfa10b2e9c12193ab9ee2eb9bfa431622fa2ae231a6d324d6a5b2bb94",
+        "warmup_time": -1
+    },
+    "binned.Lookup.time_map_linspace_int64": {
+        "code": "class Lookup:\n    def time_map_linspace_int64(self):\n        sc.lookup(self.hist_int, 'x')[self.data.bins.coords['x']]\n\n    def setup(self):\n        self.data = sc.data.binned_x(100_000_000, 10000)\n        x = sc.linspace(dim='x', start=0.0, stop=1.0, num=1_000_001, unit='m')\n        groups = sc.arange(dim='x', start=0, stop=1_000_000) // 1000 % 5\n        self.hist_bool = sc.DataArray(data=groups.astype('bool'), coords={'x': x})\n        self.hist_int = sc.DataArray(data=groups, coords={'x': x})\n        self.hist_float = sc.DataArray(data=groups.astype('float64'), coords={'x': x})",
+        "min_run_count": 2,
+        "name": "binned.Lookup.time_map_linspace_int64",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "411f722513494faafbe56d0a9d93e87f711d407cedc3569dd1f51372b3fb2a6f",
+        "warmup_time": -1
+    },
+    "variable.Variable.time_deep_copy": {
+        "code": "class Variable:\n    def time_deep_copy(self):\n        self.var1.copy()\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "variable.Variable.time_deep_copy",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e8d07ae15799fc765744c9b499c153a20769e8a2e9211ba350432d54ef3f8377",
+        "warmup_time": -1
+    },
+    "variable.Variable.time_shallow_copy": {
+        "code": "class Variable:\n    def time_shallow_copy(self):\n        self.var1.copy(deep=False)\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "variable.Variable.time_shallow_copy",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "834ba6db7f3808ba6ba4c6c9675ee517874b3cede7bbc4655c0163483f650689",
+        "warmup_time": -1
+    },
+    "variable.Variable.time_variable_inplace_operation": {
+        "code": "class Variable:\n    def time_variable_inplace_operation(self):\n        self.var1 += self.var2\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "variable.Variable.time_variable_inplace_operation",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e0a2175047c37cce1ece6d7212dc1815784c3d8c33009b768f16c9ddd57b394d",
+        "warmup_time": -1
+    },
+    "variable.Variable.time_variable_non_inplace_operation": {
+        "code": "class Variable:\n    def time_variable_non_inplace_operation(self):\n        self.var1 + self.var2\n\n    def setup(self):\n        self.var1 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])\n        self.var2 = sc.array(dims=['x'], values=[1, 2, 3, 4, 5])",
+        "min_run_count": 2,
+        "name": "variable.Variable.time_variable_non_inplace_operation",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "590cde73c39ca2fc0ad1ca736a819ef4714a68013b7687dc2c390a6a2ce54af0",
+        "warmup_time": -1
+    },
+    "version": 2
+}
