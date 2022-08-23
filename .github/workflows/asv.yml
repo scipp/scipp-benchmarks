@@ -8,11 +8,8 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build and run benchmarks
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        shell: bash -l {0}  # required for conda env
 
     steps:
       - uses: actions/checkout@v3
