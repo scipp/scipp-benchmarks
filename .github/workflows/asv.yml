@@ -41,4 +41,3 @@ jobs:
           branch: main
           folder: scipp-benchmarks
           single-commit: true
-          ssh-key: ${{ secrets.BENCHMARKS_DEPLOY_KEY }}
