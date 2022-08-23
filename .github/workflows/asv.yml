@@ -1,0 +1,56 @@
+name: ASV
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+  pull_request:    
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash -l {0}  # required for conda env
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: 'scipp/scipp'
+          path: 'scipp'
+          submodules: true
+          fetch-depth: 0  # history required so cmake can determine version
+
+      - name: Setup conda environment
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          micromamba-version: 0.23.0
+          environment-file: scipp/.buildconfig/${{ matrix.variant.cmake-preset }}.yml
+          cache-env: true
+          extra-specs: python=${{ matrix.python-version }}
+
+      - uses: hendrikmuhs/ccache-action@v1.2.2
+
+      - run: |
+          cd scipp
+          cmake --preset ci-linux
+          cmake --build --preset build
+
+      - run: cd scipp && tox -e asv
+
+        #- uses: stefanzweifel/git-auto-commit-action@v4
+        #  if: ${{ contains(matrix.variant.os, 'ubuntu') && github.ref == 'refs/heads/main' }}
+        #  with:
+        #    repository: scipp-benchmarks
+
+      # - name: Deploy benchmark results
+      #   if: ${{ contains(matrix.variant.os, 'ubuntu') && github.ref == 'refs/heads/main' }}
+      #   uses: JamesIves/github-pages-deploy-action@4.1.5
+      #   with:
+      #     repository-name: scipp/scipp-benchmarks
+      #     branch: main
+      #     folder: scipp-benchmarks
+      #     single-commit: true
+      #     ssh-key: ${{ secrets.BENCHMARKS_DEPLOY_KEY }}
