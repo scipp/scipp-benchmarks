@@ -121,6 +121,98 @@
         "version": "85fba314140d0326d27e2598f5b3e5f065bb19a10e6af335f7a3cd449dd6f44e",
         "warmup_time": -1
     },
+    "bin.Group1d.time_group": {
+        "code": "class Group1d:\n    def time_group(self, nevent, ngroup):\n        self.table.group(self.groups)\n\n    def setup(self, nevent, ngroup):\n        self.table = sc.data.table_xyz(nevent)\n        self.table.coords['group'] = (ngroup * self.table.coords['x']).to(dtype='int64')\n        del self.table.coords['x']\n        self.contiguous_groups = sc.arange('group', ngroup, unit='m')\n        self.groups = sc.arange('group', ngroup, unit='m')\n        self.groups.values[0] = 1\n        self.groups.values[1] = 0",
+        "min_run_count": 2,
+        "name": "bin.Group1d.time_group",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "ngroup"
+        ],
+        "params": [
+            [
+                "1000",
+                "1000000",
+                "10000000",
+                "100000000"
+            ],
+            [
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768",
+                "65536",
+                "131072",
+                "262144",
+                "524288"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "92bd32fb3f82d9d30f645d952c8063a3110ad25cdc67917cd7bd37f8c1f962e6",
+        "warmup_time": -1
+    },
+    "bin.Group1d.time_group_contiguous": {
+        "code": "class Group1d:\n    def time_group_contiguous(self, nevent, ngroup):\n        self.table.group(self.contiguous_groups)\n\n    def setup(self, nevent, ngroup):\n        self.table = sc.data.table_xyz(nevent)\n        self.table.coords['group'] = (ngroup * self.table.coords['x']).to(dtype='int64')\n        del self.table.coords['x']\n        self.contiguous_groups = sc.arange('group', ngroup, unit='m')\n        self.groups = sc.arange('group', ngroup, unit='m')\n        self.groups.values[0] = 1\n        self.groups.values[1] = 0",
+        "min_run_count": 2,
+        "name": "bin.Group1d.time_group_contiguous",
+        "number": 0,
+        "param_names": [
+            "nevent",
+            "ngroup"
+        ],
+        "params": [
+            [
+                "1000",
+                "1000000",
+                "10000000",
+                "100000000"
+            ],
+            [
+                "4",
+                "8",
+                "16",
+                "32",
+                "64",
+                "128",
+                "256",
+                "512",
+                "1024",
+                "2048",
+                "4096",
+                "8192",
+                "16384",
+                "32768",
+                "65536",
+                "131072",
+                "262144",
+                "524288"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 300.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6d5db53e783b888bf5ad6acebc431792b8eeb52cb8686f8043f44b0e5342a20c",
+        "warmup_time": -1
+    },
     "binned.Binned1d.time_bins_concat": {
         "code": "class Binned1d:\n    def time_bins_concat(self, nevent, nbin):\n        self.da.bins.concat('x')\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
         "min_run_count": 2,
