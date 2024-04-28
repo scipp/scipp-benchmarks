@@ -252,7 +252,7 @@
         "warmup_time": -1
     },
     "binned.Binned1d.time_bins_constituents": {
-        "code": "class Binned1d:\n    def time_bins_constituents(self, nevent, nbin):\n        self.da.bins.constituents\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
+        "code": "class Binned1d:\n    def time_bins_constituents(self, nevent, nbin):\n        self.da.bins.constituents  # noqa: B018\n\n    def setup(self, nevent, nbin):\n        self.da = sc.data.binned_x(nevent, nbin)",
         "min_run_count": 2,
         "name": "binned.Binned1d.time_bins_constituents",
         "number": 0,
@@ -286,7 +286,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "750e40adcdd72cc2ba4061a49ec5082369d1e0007cf4a6fa4c0ffa95c415c3a5",
+        "version": "d39fc5838a3227560b812759540cafc3cc2159247318db7c082dd78f6ebbd008",
         "warmup_time": -1
     },
     "binned.Binned1d.time_bins_mean": {
