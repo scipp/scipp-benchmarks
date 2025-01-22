@@ -38,8 +38,8 @@ jobs:
 
       - uses: hendrikmuhs/ccache-action@v1.2.2
 
-      - run: tox -e lib
-      - run: tox -e asv
+      - run: python -m tox -e lib
+      - run: python -m tox -e asv
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
