@@ -45,7 +45,7 @@ jobs:
           file_pattern: results/*
 
       - name: Deploy benchmark results
-        uses: JamesIves/github-pages-deploy-action@4.8.0
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
           branch: gh_pages
           folder: scipp-benchmarks/docs
