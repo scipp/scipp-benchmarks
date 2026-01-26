@@ -34,10 +34,11 @@ jobs:
 
       - uses: hendrikmuhs/ccache-action@v1.2.20
 
-      - run: cmake --preset base
+      - run: cmake --preset ci-linux
       - run: cmake --build --preset build
       - run: ctest --preset test
-      - run: python -m pip install -r requirements/asv.txt
+      - run: python -c 'import scipp'
+      - run: python -m pip install -r requirements/asv.txt -r requirements/test.txt
       - run: |
           asv machine --machine cloud-container --os "Ubuntu" --arch 'x86_64' --cpu "2 Core CPU" --num_cpu 2 --ram '7GB'
           asv update
