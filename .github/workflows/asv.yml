@@ -37,8 +37,17 @@ jobs:
       - run: cmake --preset ci-linux
       - run: cmake --build --preset build
       - run: ctest --preset test
-      - run: tox -e editable
-      - run: tox -e asv
+      - run: python -m pip install -r requirements/asv.txt
+      - name: Run ASV benchmarks
+        working-directory: scipp-benchmarks
+        env:
+          PYTHONPATH: ${{ github.workspace }}/install
+          LD_LIBRARY_PATH: ${{ github.workspace }}/install/lib
+        run: |
+          asv machine --machine cloud-container --os "Ubuntu" --arch 'x86_64' --cpu "2 Core CPU" --num_cpu 2 --ram '7GB'
+          asv update
+          asv run -v -m cloud-container -e --environment existing:python --set-commit-hash HEAD
+          asv publish
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
