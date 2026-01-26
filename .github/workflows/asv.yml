@@ -38,9 +38,9 @@ jobs:
       - run: cmake --build --preset build
       - run: ctest --preset test
       - name: Run ASV benchmarks
-        env:
-          PYTHONPATH: ${{ github.workspace }}/install
         run: |
+          # Install scipp into the conda environment so ASV subprocesses can find it
+          cp -r install/scipp "$(python -c 'import site; print(site.getsitepackages()[0])')/"
           python -c 'import scipp'
           python -m pip install -r requirements/asv.txt -r requirements/test.txt
           asv machine --machine cloud-container --os "Ubuntu" --arch 'x86_64' --cpu "2 Core CPU" --num_cpu 2 --ram '7GB'
